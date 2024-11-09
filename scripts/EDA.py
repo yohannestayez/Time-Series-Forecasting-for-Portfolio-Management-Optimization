@@ -60,12 +60,35 @@ def plot_rolling_stats(data, ticker):
     plt.legend()
     plt.show()
 
-# Function to perform and plot seasonal decomposition
-def plot_seasonal_decomposition(data, ticker):
-    decomposition = seasonal_decompose(data['Adj Close'], model='multiplicative', period=252)
-    decomposition.plot()
-    plt.suptitle(f"Seasonal Decomposition of {ticker} Adjusted Close Price")
-    plt.show()
+def plot_seasonal_decomposition(data, ticker, width=15, height=8):  # Added width and height arguments
+  """
+  Performs seasonal decomposition and plots the results with a wider figure.
+
+  Args:
+      data (pandas.Series): The time series data to decompose.
+      ticker (str): The ticker symbol for the data.
+      width (float, optional): The desired width of the plot in inches. Defaults to 12.
+      height (float, optional): The desired height of the plot in inches. Defaults to 6.
+  """
+
+  decomposition = seasonal_decompose(data['Adj Close'], model='multiplicative', period=252)
+  fig, axes = plt.subplots(4, 1, figsize=(width, height))  # Adjust figure size
+
+  decomposition.trend.plot(ax=axes[0])
+  axes[0].set_title('Trend')
+
+  decomposition.seasonal.plot(ax=axes[1])
+  axes[1].set_title('Seasonal')
+
+  decomposition.resid.plot(ax=axes[2])
+  axes[2].set_title('Residual')
+
+  data['Adj Close'].plot(ax=axes[3])
+  axes[3].set_title('Original')
+
+  plt.suptitle(f"Seasonal Decomposition of {ticker} Adjusted Close Price")
+  plt.tight_layout()  # Adjust spacing between subplots
+  plt.show()
 
 # Function to detect and display outliers based on Z-score
 def detect_outliers(data, ticker):
@@ -85,13 +108,32 @@ def calculate_volatility_metrics(data, ticker):
 
 
 
-def plot_autocorrelation(data, ticker):
-    plt.figure(figsize=(12, 6))
-    plot_acf(data['Adj Close'].dropna(), lags=30)
-    plt.title(f"Autocorrelation of Adjusted Close for {ticker}")
-    plt.show()
 
-    plt.figure(figsize=(12, 6))
-    plot_pacf(data['Adj Close'].dropna(), lags=30)
-    plt.title(f"Partial Autocorrelation of Adjusted Close for {ticker}")
-    plt.show()
+def plot_autocorrelation(data, ticker, width=15, height=6, lags=30):
+  """
+  Plots both autocorrelation (ACF) and partial autocorrelation (PACF) for adjusted close data.
+
+  Args:
+      data (pandas.Series): The time series data to decompose.
+      ticker (str): The ticker symbol for the data.
+      width (float, optional): The desired width of the plot in inches. Defaults to 15.
+      height (float, optional): The desired height of the plot in inches. Defaults to 6.
+      lags (int, optional): The number of lags to compute for ACF and PACF. Defaults to 30.
+  """
+
+  plt.figure(figsize=(width, height))
+
+  # Plot ACF on first subplot
+  ax1 = plt.subplot(211)
+  plot_acf(data['Adj Close'].dropna(), lags=lags, ax=ax1)
+  plt.title(f"Autocorrelation of Adjusted Close for {ticker}")
+
+  # Plot PACF on second subplot
+  ax2 = plt.subplot(212)
+  plot_pacf(data['Adj Close'].dropna(), lags=lags, ax=ax2)
+  plt.title(f"Partial Autocorrelation of Adjusted Close for {ticker}")
+
+  # Adjust layout for better spacing
+  plt.tight_layout()
+
+  plt.show()
