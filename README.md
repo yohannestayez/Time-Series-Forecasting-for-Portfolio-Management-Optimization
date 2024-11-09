@@ -108,7 +108,7 @@ Task 1 involves loading, cleaning, and understanding the data to prepare it for 
 
 ## Next Steps
 
-Following thhis, the next phase will involve building forecasting models to predict future asset prices and support optimized portfolio management decisions.
+Following this, the next phase will involve building forecasting models to predict future asset prices and support optimized portfolio management decisions.
 
 
 
