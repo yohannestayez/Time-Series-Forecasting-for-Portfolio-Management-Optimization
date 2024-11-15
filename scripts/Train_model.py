@@ -203,6 +203,7 @@ class LSTMModel(nn.Module):
     """
     def __init__(self, input_size=1, hidden_layer_size=50, output_size=1):
         super(LSTMModel, self).__init__()
+        self.input_size = input_size  
         # Store the size of the hidden layer
         self.hidden_layer_size = hidden_layer_size
         
