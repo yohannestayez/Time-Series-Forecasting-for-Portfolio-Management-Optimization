@@ -24,33 +24,13 @@ The dataset includes:
 
 The data covers the period from January 1, 2015, to October 31, 2024.
 
-### Data Preprocessing and Exploratory Data Analysis (EDA)
+## Notebooks
+### 1. Preprocess_and_Explore_the_Data.ipynb
+The process begins with **data extraction**, where historical data for TSLA, BND, and SPY is loaded using the Yahoo Finance API. Missing values are then addressed through forward and backward fill methods. During **data cleaning and basic statistics**, the data types are checked, and any remaining missing values are handled, followed by the display of basic statistics for each asset, such as mean and standard deviation. The next step involves **exploratory data analysis (EDA)**, which includes visualizing the adjusted close prices over time to identify long-term trends, calculating and plotting daily returns to assess volatility, and analyzing rolling mean and standard deviations to capture short-term trends. Additionally, **outlier detection** is conducted by identifying days with extreme returns using Z-scores. **Seasonality and trend analysis** is performed by decomposing each asset's time series into its trend, seasonal, and residual components. In **volatility analysis**, Value at Risk (VaR) is calculated at a 99% confidence level, alongside the Sharpe Ratio, providing insights into potential losses and risk-adjusted returns. Finally, **autocorrelation analysis** is conducted by plotting the Autocorrelation Function (ACF) and Partial Autocorrelation Function (PACF) to uncover further patterns in the data.
 
-#### Objective
-Task 1 involves loading, cleaning, and understanding the data to prepare it for further modeling. Specifically, it covers data extraction, cleaning, exploratory data analysis, seasonality analysis, and volatility metrics.
 
-#### Requirements Fulfilled
-
-1. **Data Extraction**: 
-   - Load historical data for TSLA, BND, and SPY using the Yahoo Finance API.
-   - Clean missing values using forward and backward fill methods.
-
-2. **Data Cleaning and Basic Statistics**:
-   - Check for data types and ensure no missing values remain.
-   - Display basic statistics for each asset (mean, standard deviation, etc.).
-
-3. **Exploratory Data Analysis (EDA)**:
-   - **Trend Analysis**: Visualize adjusted close prices over time to observe long-term trends.
-   - **Daily Volatility Analysis**: Calculate and plot daily returns to understand volatility.
-   - **Rolling Statistics**: Analyze rolling mean and standard deviations for short-term trends.
-   - **Outlier Detection**: Identify days with unusually high or low returns using Z-scores.
-   
-4. **Seasonality and Trend Analysis**:
-   - Decompose time series into trend, seasonal, and residual components for each asset.
-
-5. **Volatility Analysis**:
-   - Calculate Value at Risk (VaR) at 99% confidence level and the Sharpe Ratio, providing insights on potential losses and risk-adjusted returns.
-6. **Autocorrelation Analysis**: Plot ACF and PACF for further pattern recognition.
+### 2. Time_Series_Forecasting_Tesla_SPY_BND.ipynb
+This notebook focuses on developing time series forecasting models for financial data, specifically for Tesla (TSLA), Vanguard Total Bond Market ETF (BND), and S&P 500 ETF (SPY). It includes a thorough preprocessing step to ensure the data is clean and suitable for modeling. Stationarity is checked and enforced through differencing where necessary, as time series models like ARIMA require stationary input. Three types of forecasting models are implemented: ARIMA, SARIMA, and LSTM using PyTorch. The notebook also evaluates the models' performance using metrics such as Mean Absolute Error (MAE), Root Mean Squared Error (RMSE), and Mean Absolute Percentage Error (MAPE). Additionally, it includes visualizations to analyze trends, volatility, and forecast accuracy, making it an end-to-end solution for time series forecasting.
 
 ## Installation
 
@@ -65,12 +45,12 @@ Task 1 involves loading, cleaning, and understanding the data to prepare it for 
    pip install -r requirements.txt
    ```
    
-   Make sure `yfinance`, `pandas`, `numpy`, `matplotlib`, `seaborn`, and `statsmodels` are installed.
+   Make sure `yfinance`, `pandas`, `numpy`, `matplotlib`, `seaborn`, `statsmodels`, `scikit-learn`, `torch`and `pmdarima` are installed.
 
 ## Usage
 
 1. **Run the Notebook**:
-   Open `Preprocess_and_Explore_the_Data.ipynb` in Jupyter Notebook to execute the analysis.
+   Open the notebooks Jupyter Notebook to execute the analysis.
    
 2. **Modular Analysis Functions**:
    Each section in Task 1 is modularized into functions, so you can apply them individually to different assets or run them all sequentially.
@@ -93,7 +73,9 @@ Task 1 involves loading, cleaning, and understanding the data to prepare it for 
 │   └── __init__.py
 ├── notebooks/
 │   ├── __init__.py
-│   └── Preprocess_and_Explore_the_Data.ipynb
+│   ├── Preprocess_and_Explore_the_Data.ipynb
+│   └── Time_Series_Forecasting_Tesla_SPY_BND.ipynb
+│
 |
 ├── data/  
 |
@@ -102,13 +84,14 @@ Task 1 involves loading, cleaning, and understanding the data to prepare it for 
 └── scripts/
     ├── __init__.py
     ├── EDA.py
+    ├── Train_model.py
     └── README.md
 ```
 
 
-## Next Steps
 
-Following this, the next phase will involve building forecasting models to predict future asset prices and support optimized portfolio management decisions.
+
+
 
 
 
