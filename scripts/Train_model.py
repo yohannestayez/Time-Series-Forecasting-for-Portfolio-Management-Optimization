@@ -201,7 +201,7 @@ class LSTMModel(nn.Module):
         lstm (nn.LSTM): The LSTM layer to process sequential data.
         linear (nn.Linear): The linear layer to map the LSTM's output to the desired output size.
     """
-    def __init__(self, input_size=1, hidden_layer_size=50, output_size=1):
+    def __init__(self, input_size, hidden_layer_size=50, output_size=1):
         super(LSTMModel, self).__init__()
         self.input_size = input_size  
         # Store the size of the hidden layer
